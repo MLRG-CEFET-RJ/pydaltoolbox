@@ -6,19 +6,18 @@ data(har_examples_multi)
 #Using the time series 9
 dataset <- har_examples_multi[[1]]
 head(dataset)
-
-plot_ts(x = 1:length(dataset$x), y = dataset$x)
-plot_ts(x = 1:length(dataset$y), y = dataset$y)
 dataset$event <- NULL
 
 norm <- minmax()
 norm <- fit(norm, dataset)
 dataset <- transform(norm, dataset)
 summary(dataset)
-write.table(dataset, file="dataset.csv", row.names=FALSE, quote = FALSE, sep = ",")
-
 plot_ts(x = 1:length(dataset$x), y = dataset$x)
 plot_ts(x = 1:length(dataset$y), y = dataset$y)
+
+
+write.table(dataset, file="dataset.csv", row.names=FALSE, quote = FALSE, sep = ",")
+
 
 
 datax <- as.data.frame(ts_data(dataset$x, 5))
